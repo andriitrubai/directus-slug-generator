@@ -44,8 +44,8 @@ export default defineInterface({
       },
     },
     {
-      field: "status_field",
-      name: "Status Field",
+      field: "select_field",
+      name: "Source Field",
       type: "string",
       meta: {
         width: "half",
