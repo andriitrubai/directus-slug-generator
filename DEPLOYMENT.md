@@ -1,3 +1,5 @@
+This package is a fork of [markosiilak/directus-slug-generator.git](https://github.com/markosiilak/directus-slug-generator.git).It includes additional fixes and modifications maintained independently.
+
 # Deployment Guide
 
 This guide explains how to deploy the Directus Slug Generator extension to npm and GitHub.
@@ -16,8 +18,8 @@ Before publishing, update the following in `package.json`:
 ```json
 {
   "author": {
-    "name": "Marko Siilak",
-    "email": "marko@siilak.com"
+    "name": "Andrii Trubai",
+    "email": "andrii.trubai@zagroza.agency"
   },
   "repository": {
     "type": "git",
@@ -65,22 +67,22 @@ npm publish --access public
 ### Subsequent Updates
 
 1. Update version in `package.json`:
+
    ```bash
    npm version patch  # for bug fixes
    npm version minor  # for new features
    npm version major  # for breaking changes
    ```
-
 2. Update `CHANGELOG.md` with the new version
-
 3. Commit and tag:
+
    ```bash
    git add .
    git commit -m "Release version X.X.X"
    git tag -a vX.X.X -m "Release version X.X.X"
    ```
-
 4. Publish:
+
    ```bash
    npm publish
    ```
@@ -115,6 +117,7 @@ git push --tags
 ### Enable GitHub Actions
 
 The CI/CD workflow will automatically:
+
 - Build the extension on multiple Node.js versions
 - Run tests
 - Publish to npm when pushing to main branch
@@ -177,6 +180,7 @@ After publishing, verify:
 ## Support
 
 For issues or questions:
+
 - Create an issue on GitHub
 - Check the documentation in README.md
-- Review the changelog for recent changes 
+- Review the changelog for recent changes
