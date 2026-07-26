@@ -1,3 +1,5 @@
+This project is a fork of the original [directus-slug-generator](https://github.com/markosiilak/directus-slug-generator).  The fork is actively maintained and includes additional features, bug fixes, and improvements that are not available in the original project for now.
+
 # Directus Slug Generator Extension
 
 A powerful Directus extension that automatically generates URL-friendly slugs from other fields in your collection. Perfect for creating SEO-friendly URLs, blog posts, articles, and any content that needs clean, readable URLs.
@@ -25,7 +27,6 @@ npm install directus-slug-generator
 ```bash
 # Install the latest version
 npm install directus-slug-generator
-
 ```
 
 ### Method 2: Directus Extensions Directory
@@ -65,23 +66,23 @@ cp -r . /path/to/your/directus/extensions/interfaces/slug-generator/
 
 ```json
 {
-  "select_field": "title",
-  "generation_mode": "slug",            // "slug" | "uuid"
+  "selectField": "title",
+  "generationMode": "slug",            // "slug" | "uuid"
   "auto": true,                          // Auto-generate on mount/changes
   "required": true,
   "separator": "-",
   "lowercase": true,
   "placeholder": "Enter a slug or url...",
-  "custom_empty_message": null,
-  "custom_format_message": null,
-  "custom_unique_message": null,
-  "allow_duplicates": false,             // If false, checks uniqueness in the collection
-  "auto_update_mode": "change",         // "disabled" | "change" | "blur" | "focus" | "realtime"
-  "preserve_existing": false,            // Keep existing value when source changes
-  "update_delay": 100,
-  "show_preview_link": true,
-  "preview_base_url": "https://example.com",
-  "preview_open_in_new_tab": true
+  "customEmptyMessage": null,
+  "customFormatMessage": null,
+  "customUniqueMessage": null,
+  "allowDuplicates": false,             // If false, checks uniqueness in the collection
+  "autoUpdateMode": "change",         // "disabled" | "change" | "blur" | "focus" | "realtime"
+  "preserveExisting": false,            // Keep existing value when source changes
+  "updateDelay": 100,
+  "showPreviewLink": true,
+  "previewBaseUrl": "https://example.com",
+  "previewOpenInNewTab": true
 }
 ```
 
@@ -105,9 +106,9 @@ cp -r . /path/to/your/directus/extensions/interfaces/slug-generator/
 // Fields: title, slug, content, published_date
 
 {
-  "select_field": "title",
+  "selectField": "title",
   "auto": true,
-  "auto_update_mode": "change",
+  "autoUpdateMode": "change",
   "separator": "-",
   "lowercase": true
 }
@@ -120,9 +121,9 @@ cp -r . /path/to/your/directus/extensions/interfaces/slug-generator/
 
 ```json
 {
-  "generation_mode": "uuid",
+  "generationMode": "uuid",
   "auto": true,
-  "allow_duplicates": true
+  "allowDuplicates": true
 }
 ```
 
@@ -130,9 +131,9 @@ cp -r . /path/to/your/directus/extensions/interfaces/slug-generator/
 
 ```json
 {
-  "show_preview_link": true,
-  "preview_base_url": "https://example.com/blog",
-  "preview_open_in_new_tab": true
+  "showPreviewLink": true,
+  "previewBaseUrl": "https://example.com/blog",
+  "previewOpenInNewTab": true
 }
 ```
 
@@ -148,7 +149,7 @@ cp -r . /path/to/your/directus/extensions/interfaces/slug-generator/
   "update_mode": "change",
   "separator": "-",
   "lowercase": true,
-  "preserve_existing": true
+  "preserveExisting": true
 }
 
 // Input: "iPhone 15 Pro Max"
@@ -159,13 +160,13 @@ cp -r . /path/to/your/directus/extensions/interfaces/slug-generator/
 
 ### Update Modes
 
-| Mode | Description |
-|------|-------------|
-| `disabled` | No automatic updates |
-| `change` | Update on input/change events |
-| `blur` | Update when source field loses focus |
-| `focus` | Update when source field gains focus |
-| `realtime` | Same as `change` (live typing) |
+| Mode       | Description                          |
+| ---------- | ------------------------------------ |
+| `disabled` | No automatic updates                 |
+| `change`   | Update on input/change events        |
+| `blur`     | Update when source field loses focus |
+| `focus`    | Update when source field gains focus |
+| `realtime` | Same as`change` (live typing)        |
 
 ### Configuration Options
 
@@ -196,7 +197,7 @@ Built-in transliteration covers:
 ## ✅ Validation
 
 - **Format**: Accepts full URLs (http/https) or slugs. For URLs, dots/colons/slashes are preserved and cleaned. For slugs, letters, numbers, hyphens and slashes are allowed and normalized.
-- **Uniqueness**: If `allow_duplicates` is false, the value is checked for uniqueness in the current collection (excluding the current item by primary key).
+- **Uniqueness**: If `allowDuplicates` is false, the value is checked for uniqueness in the current collection (excluding the current item by primary key).
 - **Draft bypass**: If your item status is `draft`, validation is skipped until publishing.
 
 ## 🛠️ Development
@@ -235,10 +236,10 @@ npm run build:dev
 
 ### Emits
 
-| Event | Payload |
-|-------|---------|
-| `input` | `string` (the current value) |
-| `validation` | `boolean` (is valid) |
+| Event        | Payload                      |
+| ------------ | ---------------------------- |
+| `input`      | `string` (the current value) |
+| `validation` | `boolean` (is valid)         |
 
 ## 🙏 Acknowledgments
 
