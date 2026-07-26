@@ -1,5 +1,5 @@
 <template>
-  <div class="slug-generator">
+  <div class="slug-generator" ref="el">
     <v-input
       v-if="isEditing"
       v-model="internalValue"
@@ -65,25 +65,15 @@
 
 <script setup lang="ts">
   import { useApi, useStores } from '@directus/extensions-sdk';
-  import { computed, onMounted, onUnmounted, type Ref, ref, toRef, watch } from 'vue';
+  import { computed, onMounted, onUnmounted, type Ref, ref, watch } from 'vue';
 
   import { type AutoUpdateConfig, type AutoUpdateResult, createAutoUpdater } from './utils/autoUpdate';
   import {
-    DateFormat,
-    type DateParseResult,
-    extractFieldValue,
-    type FieldElement,
     type FieldName,
-    findFieldElement,
     getProcessedFieldValue,
     getStatusValue,
-    isDateField,
-    isElement,
     isHTMLInputElement,
-    isHTMLSelectElement,
-    isHTMLTextAreaElement,
     isString,
-    parseDateValue,
     type StatusValue
   } from './utils/fieldDetection';
   import { createSlug } from './utils/transliteration';
@@ -126,6 +116,8 @@
     input: [value: string];
     validation: [isValid: boolean];
   }>();
+
+  const el = ref<HTMLElement | null>(null);
 
   // Enums for better type safety
   enum ValidationStatus {
@@ -350,7 +342,7 @@
   const fetchSourceValue = async (): Promise<void> => {
     if (!selectedSourceField.value) return;
     
-    const processedValue = getProcessedFieldValue(selectedSourceField.value);
+    const processedValue = getProcessedFieldValue(selectedSourceField.value, el.value);
     if (processedValue) {
       sourceValue.value = processedValue;
     }
@@ -374,7 +366,7 @@
     const fieldName = selectedSourceField.value || props.select_field || 'title';
     console.log('Looking for source field:', fieldName);
     
-    const processedValue = getProcessedFieldValue(fieldName);
+    const processedValue = getProcessedFieldValue(fieldName, el.value);
     console.log('Processed value from source field:', processedValue);
     
     if (processedValue) {
@@ -395,7 +387,7 @@
       // Try common field names as fallback
       const fallbackFields = ['title', 'name', 'heading', 'label'];
       for (const fallbackField of fallbackFields) {
-        const fallbackValue = getProcessedFieldValue(fallbackField);
+        const fallbackValue = getProcessedFieldValue(fallbackField, el.value);
         if (fallbackValue) {
           console.log(`Using fallback field "${fallbackField}" with value:`, fallbackValue);
           sourceValue.value = fallbackValue;
@@ -494,7 +486,7 @@
         emit('input', internalValue.value);
       } else {
         const fieldName = props.select_field || 'title';
-        const processedValue = getProcessedFieldValue(fieldName);
+        const processedValue = getProcessedFieldValue(fieldName, el.value);
         if (processedValue) {
           sourceValue.value = processedValue;
           const slugOptions: SlugOptions = {
@@ -555,7 +547,7 @@
       if (props.auto) {
         if (props.generation_mode === 'uuid') return null;
         const fieldName = props.select_field || 'title';
-        return getProcessedFieldValue(fieldName);
+        return getProcessedFieldValue(fieldName, el.value);
       }
       return null;
     },

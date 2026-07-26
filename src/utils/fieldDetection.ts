@@ -232,7 +232,7 @@ export const extractFieldValue = (element: Element): string | null => {
   return value;
 };
 
-export const findFieldElement = (fieldName: FieldName): FieldElement | null => {
+export const findFieldElement = (fieldName: FieldName, container: HTMLElement): FieldElement | null => {
   console.log(`Searching for field: ${fieldName}`);
   
   const selectors = [
@@ -298,7 +298,8 @@ export const findFieldElement = (fieldName: FieldName): FieldElement | null => {
 
   for (const selector of selectors) {
     console.log(`Trying selector: ${selector}`);
-    const element = document.querySelector(selector);
+
+    const element = container?.querySelector(selector);
     if (isElement(element)) {
       console.log(`Found element for selector "${selector}":`, element);
       const value = extractFieldValue(element);
@@ -328,9 +329,34 @@ export const findFieldElement = (fieldName: FieldName): FieldElement | null => {
   return null;
 };
 
+const getParents = (element: HTMLElement, selector: string): HTMLElement[] => {
+  const parents = [];
+  let current = element.parentElement;
+
+  while (current) {
+    if (current.matches(selector)) {
+      parents.push(current);
+    }
+    current = current.parentElement;
+  }
+
+  return parents;
+};
+
 // Main function to get processed field value
-export const getProcessedFieldValue = (fieldName: FieldName): string | null => {
-  const fieldElement = findFieldElement(fieldName);
+export const getProcessedFieldValue = (fieldName: FieldName, container: HTMLElement | null): string | null => {
+  const exactContainer = container || document.body;
+  const parentForms = getParents(exactContainer, ".v-form");
+
+  let fieldElement: FieldElement | null = null;
+
+  for (const form of parentForms) {
+    fieldElement = findFieldElement(fieldName, form);
+
+    if (fieldElement) {
+      break;
+    }
+  }
 
   if (fieldElement && fieldElement.value) {
     let processedValue = fieldElement.value;
