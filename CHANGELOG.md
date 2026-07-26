@@ -8,6 +8,7 @@
 ### Enhanced
 
 * Use eslint
+* Slug field now looks like a regular Directus field
 
 ## [1.1.5] - 2025-01-XX
 
