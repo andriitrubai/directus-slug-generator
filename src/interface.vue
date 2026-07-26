@@ -6,7 +6,6 @@
       :placeholder="placeholder"
       :disabled="disabled"
       :class="{ 'has-error': !isValid }"
-      small
       autofocus
       @input="processInput"
       @blur="disableEdit"
@@ -621,7 +620,8 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: calc(var(--theme--form--field--input--padding) / 3);
+  padding: 0 var(--theme--form--field--input--padding);
+  block-size: var(--theme--form--field--input--height);
   background-color: var(--theme--form--field--input--background);
   border: var(--theme--border-width) solid var(--theme--border-color);
   border-radius: var(--theme--border-radius);
