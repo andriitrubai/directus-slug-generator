@@ -1,6 +1,11 @@
 This project is a fork of the original [directus-slug-generator](https://github.com/markosiilak/directus-slug-generator).  The fork is actively maintained and includes additional features, bug fixes, and improvements that are not available in the original project for now.
 
-# Directus Slug Generator Extension
+Improvements in relation to previous version:
+
+* Correct source field determining (works correctly with Translations interface with split mode enabled)
+* UI improvements: slug field looks like a regular Directus field
+
+# Directus Slug Generator (Improved) Extension
 
 A powerful Directus extension that automatically generates URL-friendly slugs from other fields in your collection. Perfect for creating SEO-friendly URLs, blog posts, articles, and any content that needs clean, readable URLs.
 
@@ -160,6 +165,7 @@ cp -r . /path/to/your/directus/extensions/interfaces/slug-generator/
 
 ### Update Modes
 
+
 | Mode       | Description                          |
 | ---------- | ------------------------------------ |
 | `disabled` | No automatic updates                 |
@@ -236,6 +242,7 @@ npm run build:dev
 
 ### Emits
 
+
 | Event        | Payload                      |
 | ------------ | ---------------------------- |
 | `input`      | `string` (the current value) |
@@ -250,4 +257,3 @@ npm run build:dev
 ---
 
 **Made with ❤️ by [Marko Siilak](https://github.com/markosiilak)**
-
