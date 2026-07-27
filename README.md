@@ -5,7 +5,11 @@ Improvements in relation to previous version:
 * Correct source field determining (works correctly with Translations interface with split mode enabled)
 * UI improvements: slug field looks like a regular Directus field
 
-# Directus Slug Generator (Improved) Extension
+
+![Demo](assets/demo.gif)
+
+
+Directus Slug Generator (Improved) Extension
 
 A powerful Directus extension that automatically generates URL-friendly slugs from other fields in your collection. Perfect for creating SEO-friendly URLs, blog posts, articles, and any content that needs clean, readable URLs.
 

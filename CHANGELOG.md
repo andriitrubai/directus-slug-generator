@@ -1,3 +1,7 @@
+## [1.1.10] - 2026-07-XX
+
+Demo gif was added into readme file
+
 ## [1.1.9] - 2026-07-XX
 
 Package description was updated
