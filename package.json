@@ -1,6 +1,6 @@
 {
 	"name": "@andrii.trubai/directus-slug-generator",
-	"version": "1.1.9",
+	"version": "1.1.10",
 	"description": "Improved version of the Advanced slug generator interface for Directus CMS with auto-update functionality",
 	"author": {
 		"name": "Andrii Trubai",
